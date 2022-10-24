@@ -1,0 +1,44 @@
+@import "../../styles/mixin";
+
+.header {
+  &-toolbar {
+    padding: 0 !important;
+    justify-content: center;
+
+    @include desktop {
+      padding: 0 20px !important;
+      justify-content: flex-start;
+    }
+
+    &__iconDrawer {
+      display: none !important;
+
+      @include desktop {
+        display: inline-flex !important;
+      }
+    }
+
+    &__navbar {
+      display: flex;
+
+      @include desktop {
+        display: none;
+      }
+    }
+  }
+
+  &-list {
+    display: flex;
+    font-size: 13.5px;
+
+    @include desktop {
+      font-size: 15px;
+    }
+
+    &__item:nth-last-of-type(-n + 3) {
+      @media (max-width: 1300px) {
+        display: none;
+      }
+    }
+  }
+}
