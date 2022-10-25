@@ -1,3 +1,4 @@
+@use "../../styles/variables";
 @import "../../styles/mixin";
 
 .header {
@@ -24,6 +25,12 @@
       @include desktop {
         display: none;
       }
+
+      .navbar-readAll {
+        &:hover {
+          color: variables.$green-1;
+        }
+      }
     }
   }
 
@@ -35,9 +42,15 @@
       font-size: 15px;
     }
 
-    &__item:nth-last-of-type(-n + 3) {
-      @media (max-width: 1300px) {
-        display: none;
+    &__item {
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:nth-last-of-type(-n + 3) {
+        @media (max-width: 1300px) {
+          display: none;
+        }
       }
     }
   }

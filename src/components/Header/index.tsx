@@ -78,6 +78,7 @@ export default function Header() {
                 margin: 0,
                 padding: 0,
                 listStyleType: "none",
+                alignItems: "center",
               }}
             >
               {navItems.map((item) => (
@@ -97,15 +98,26 @@ export default function Header() {
                 </Box>
               ))}
             </Box>
-            <Button
-              sx={{ padding: 0, minWidth: "auto", color: "#999" }}
+            <Box
+              sx={{
+                padding: 0,
+                minWidth: "auto",
+                color: "#999",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
               onClick={handleDrawerToggle}
+              className="navbar-readAll"
             >
-              <Typography sx={{ fontSize: 13, marginRight: "5px" }}>
+              <Typography
+                sx={{ fontSize: 13, marginRight: "5px", fontWeight: 700 }}
+              >
                 Tất cả
               </Typography>
               <MenuIcon sx={{ fontSize: 17 }} />
-            </Button>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

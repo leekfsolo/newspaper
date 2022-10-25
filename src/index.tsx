@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux/es/exports";
 import store from "./app/store";
 import Header from "./components/Header";
+import MainPage from "./pages/MainPage";
 import "./_styles.scss";
 
 const root = ReactDOM.createRoot(
@@ -10,7 +11,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <Header />
+    <>
+      <Header />
+      <MainPage />
+    </>
   </Provider>
 );
 
