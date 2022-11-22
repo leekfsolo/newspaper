@@ -10,14 +10,14 @@ const Newspaper = (props: Props) => {
   const { description, img, label } = data;
 
   return (
-    <div className="newspaper mt-4">
-      <div className="row flex-nowrap">
-        <div className="col-7">
-          <img src={img} alt="poster" className="newspaper-img" />
+    <div className="newspaper">
+      <div className="row flex-nowrap newspaper-article">
+        <div className="col-12 col-lg-7">
+          <img src={img} alt="poster" className="newspaper-article__img" />
         </div>
 
         <div className="col">
-          <div className="newspaper-content">
+          <div className="newspaper-article__content">
             <h6>{label}</h6>
             <p>{description}</p>
           </div>

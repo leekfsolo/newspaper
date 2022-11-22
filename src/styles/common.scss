@@ -12,3 +12,9 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -43,7 +43,7 @@ const newspapers: Array<INewspaper> = [
 
 const MainPage = () => {
   return (
-    <main className="container">
+    <main className="container py-3">
       {newspapers.map((newspaper) => (
         <Newspaper key={newspaper.label} data={newspaper} />
       ))}

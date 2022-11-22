@@ -1,28 +1,41 @@
 @use "../../styles/variables";
+@import "../../styles/mixin";
 
 .newspaper {
-  &-img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    transform: scale(0.9);
-    transition: transform 0.2s linear;
-  }
+  &-article {
+    flex-direction: row;
 
-  &:hover {
-    cursor: pointer;
-
-    .newspaper-img {
-      transform: scale(1);
+    @include tablet {
+      flex-direction: column;
     }
-  }
 
-  &-content {
-    margin-top: 40px;
+    &__img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      transform: scale(0.9);
+      cursor: pointer;
 
-    h6 {
-      font-size: 2.5rem;
-      padding-right: 50px;
+      @include tablet {
+        transform: scale(1);
+      }
+    }
+
+    &__content {
+      margin-top: 40px;
+
+      @include tablet {
+        margin-top: 20px;
+      }
+
+      h6 {
+        font-size: 2.5rem;
+        padding-right: 50px;
+
+        @include tablet {
+          padding-right: 0;
+        }
+      }
     }
   }
 
@@ -43,6 +56,12 @@
       height: 7px;
       border-radius: 50%;
       background-color: variables.$green-1;
+    }
+  }
+
+  &:last-child {
+    .newspaper-divider {
+      display: none;
     }
   }
 }
