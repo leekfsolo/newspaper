@@ -1,5 +1,4 @@
-@use "../../styles/variables";
-@import "../../styles/mixin";
+@use "styles/index" as *;
 
 .header {
   &-toolbar {
@@ -28,7 +27,7 @@
 
       .navbar-readAll {
         &:hover {
-          color: variables.$green-1;
+          color: $green-1;
         }
       }
     }
