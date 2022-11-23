@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import headerReducer from "components/Header/headerSlice";
+import globalReducer from "./globalSlice";
 
 const rootReducer = {
   header: headerReducer,
+  global: globalReducer,
 };
 
 const store = configureStore({ reducer: rootReducer });

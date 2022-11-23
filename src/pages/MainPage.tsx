@@ -1,3 +1,5 @@
+import { useAppSelector } from "app/hooks";
+import Loading from "components/Loading";
 import React from "react";
 import Newspaper from "../components/Newspaper";
 import { INewspaper } from "../utils/interface";
@@ -42,8 +44,11 @@ const newspapers: Array<INewspaper> = [
 ];
 
 const MainPage = () => {
+  const { isLoading } = useAppSelector((state) => state.global);
+
   return (
     <main className="container py-3">
+      <Loading isOpen={isLoading} />
       {newspapers.map((newspaper, idx) => (
         <Newspaper key={`newspaper-${idx}`} data={newspaper} />
       ))}

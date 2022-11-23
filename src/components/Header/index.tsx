@@ -10,6 +10,7 @@ import Sidenav from "../Sidenav";
 import { Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getCategories } from "./headerSlice";
+import { handleLoading } from "app/globalSlice";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -18,15 +19,25 @@ export default function Header() {
   const { data: categoryData } = useAppSelector((state) => state.header);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(handleLoading(true));
+
+    try {
+      const fetchData = async () => {
+        await dispatch(getCategories());
+      };
+
+      fetchData();
+    } catch (err) {
+      console.error("ERROR: ", err);
+    } finally {
+      dispatch(handleLoading(false));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  console.log(categoryData);
 
   return (
     <Box sx={{ display: "flex" }} className="header">
