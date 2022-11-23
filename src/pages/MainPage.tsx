@@ -1,56 +1,37 @@
-import { useAppSelector } from "app/hooks";
+import { handleLoading } from "app/globalSlice";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { globalSelector, homeSelector } from "app/selectors";
 import Loading from "components/Loading";
-import React from "react";
+import React, { useEffect } from "react";
 import Newspaper from "../components/Newspaper";
-import { INewspaper } from "../utils/interface";
-
-const newspapers: Array<INewspaper> = [
-  {
-    img: "https://cdn.tuoitre.vn/zoom/504_315/2022/10/24/nova-1-1666595567101786912310-crop-16665957294551455548631.jpeg",
-    label: "Novaland: Tin đồn và văn bản 'cầu cứu' trên mạng là bịa đặt",
-    description:
-      "TTO - Ngày 24-10, Novaland đã chính thức thông tin về các tin đồn những ngày qua liên quan đến các dự án của doanh nghiệp này. Phía Novaland khẳng...",
-  },
-  {
-    img: "https://cdn.tuoitre.vn/zoom/504_315/2022/10/24/nova-1-1666595567101786912310-crop-16665957294551455548631.jpeg",
-    label: "Novaland: Tin đồn và văn bản 'cầu cứu' trên mạng là bịa đặt",
-    description:
-      "TTO - Ngày 24-10, Novaland đã chính thức thông tin về các tin đồn những ngày qua liên quan đến các dự án của doanh nghiệp này. Phía Novaland khẳng...",
-  },
-  {
-    img: "https://cdn.tuoitre.vn/zoom/504_315/2022/10/24/nova-1-1666595567101786912310-crop-16665957294551455548631.jpeg",
-    label: "Novaland: Tin đồn và văn bản 'cầu cứu' trên mạng là bịa đặt",
-    description:
-      "TTO - Ngày 24-10, Novaland đã chính thức thông tin về các tin đồn những ngày qua liên quan đến các dự án của doanh nghiệp này. Phía Novaland khẳng...",
-  },
-  {
-    img: "https://cdn.tuoitre.vn/zoom/504_315/2022/10/24/nova-1-1666595567101786912310-crop-16665957294551455548631.jpeg",
-    label: "Novaland: Tin đồn và văn bản 'cầu cứu' trên mạng là bịa đặt",
-    description:
-      "TTO - Ngày 24-10, Novaland đã chính thức thông tin về các tin đồn những ngày qua liên quan đến các dự án của doanh nghiệp này. Phía Novaland khẳng...",
-  },
-  {
-    img: "https://cdn.tuoitre.vn/zoom/504_315/2022/10/24/nova-1-1666595567101786912310-crop-16665957294551455548631.jpeg",
-    label: "Novaland: Tin đồn và văn bản 'cầu cứu' trên mạng là bịa đặt",
-    description:
-      "TTO - Ngày 24-10, Novaland đã chính thức thông tin về các tin đồn những ngày qua liên quan đến các dự án của doanh nghiệp này. Phía Novaland khẳng...",
-  },
-  {
-    img: "https://cdn.tuoitre.vn/zoom/504_315/2022/10/24/nova-1-1666595567101786912310-crop-16665957294551455548631.jpeg",
-    label: "Novaland: Tin đồn và văn bản 'cầu cứu' trên mạng là bịa đặt",
-    description:
-      "TTO - Ngày 24-10, Novaland đã chính thức thông tin về các tin đồn những ngày qua liên quan đến các dự án của doanh nghiệp này. Phía Novaland khẳng...",
-  },
-];
+import { getNews } from "./homePageSlice";
 
 const MainPage = () => {
-  const { isLoading } = useAppSelector((state) => state.global);
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector(globalSelector);
+  const { newsData } = useAppSelector(homeSelector);
+
+  useEffect(() => {
+    dispatch(handleLoading(true));
+    try {
+      const fetchData = async () => {
+        await dispatch(getNews());
+      };
+
+      fetchData();
+    } catch (err) {
+      console.error("ERROR: ", err);
+    } finally {
+      dispatch(handleLoading(false));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="container py-3">
       <Loading isOpen={isLoading} />
-      {newspapers.map((newspaper, idx) => (
-        <Newspaper key={`newspaper-${idx}`} data={newspaper} />
+      {newsData.map((newspaper) => (
+        <Newspaper key={newspaper.id} data={newspaper} />
       ))}
     </main>
   );

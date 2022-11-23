@@ -11,12 +11,13 @@ import { Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getCategories } from "./headerSlice";
 import { handleLoading } from "app/globalSlice";
+import { headerSelector } from "app/selectors";
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const headerRef = useRef<HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const { data: categoryData } = useAppSelector((state) => state.header);
+  const { data: categoryData } = useAppSelector(headerSelector);
 
   useEffect(() => {
     dispatch(handleLoading(true));

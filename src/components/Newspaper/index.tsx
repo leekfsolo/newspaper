@@ -1,5 +1,5 @@
+import { INewspaper } from "pages/interface";
 import React from "react";
-import { INewspaper } from "../../utils/interface";
 
 type Props = {
   data: INewspaper;
@@ -7,18 +7,19 @@ type Props = {
 
 const Newspaper = (props: Props) => {
   const { data } = props;
-  const { description, img, label } = data;
+  const { description, image, title, createdAt } = data;
 
   return (
     <div className="newspaper">
       <div className="row flex-nowrap newspaper-article">
         <div className="col-12 col-lg-7">
-          <img src={img} alt="poster" className="newspaper-article__img" />
+          <img src={image} alt="poster" className="newspaper-article__img" />
         </div>
 
         <div className="col">
           <div className="newspaper-article__content">
-            <h6>{label}</h6>
+            <small>{createdAt}</small>
+            <h6>{title}</h6>
             <p>{description}</p>
           </div>
         </div>
