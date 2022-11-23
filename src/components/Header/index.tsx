@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -8,34 +8,25 @@ import Button from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
 import Sidenav from "../Sidenav";
 import { Typography } from "@mui/material";
-
-const navItems = [
-  "Media",
-  "thời sự",
-  "thế giới",
-  "pháp luật",
-  "kinh doanh",
-  "công nghệ",
-  "xe",
-  "du lịch",
-  "nhịp sống trẻ",
-  "văn hóa",
-  "giải trí",
-  "thể thao",
-  "giáo dục",
-  "khoa học",
-  "sức khỏe",
-  "giả - thật",
-  "bạn đọc",
-];
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { getCategories } from "./headerSlice";
 
 export default function Header() {
+  const dispatch = useAppDispatch();
   const headerRef = useRef<HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const { data: categoryData } = useAppSelector((state) => state.header);
+
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  console.log(categoryData);
 
   return (
     <Box sx={{ display: "flex" }} className="header">
@@ -81,10 +72,10 @@ export default function Header() {
                 alignItems: "center",
               }}
             >
-              {navItems.map((item) => (
+              {categoryData.map((item) => (
                 <Box
                   component="li"
-                  key={item}
+                  key={item.id}
                   sx={{
                     color: "#000",
                     fontWeight: 700,
@@ -94,7 +85,7 @@ export default function Header() {
                   }}
                   className="header-list__item"
                 >
-                  {item}
+                  {item.label}
                 </Box>
               ))}
             </Box>
@@ -123,7 +114,7 @@ export default function Header() {
       </AppBar>
       <Sidenav
         handleDrawerToggle={handleDrawerToggle}
-        navItems={navItems}
+        navItems={categoryData}
         mobileOpen={mobileOpen}
       />
     </Box>

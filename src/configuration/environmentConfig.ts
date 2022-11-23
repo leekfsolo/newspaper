@@ -1,6 +1,6 @@
 const enviromentConfig = {
   development: {
-    endPoint: "http://localhost:5223",
+    endPoint: "https://localhost:44386",
   },
   production: {
     endPoint: "",

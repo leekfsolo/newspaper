@@ -9,10 +9,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { ICategory } from "components/interface";
 
 type Props = {
   handleDrawerToggle: () => void;
-  navItems: Array<string>;
+  navItems: Array<ICategory>;
   mobileOpen: boolean;
 };
 
@@ -43,9 +44,9 @@ const Sidenav = (props: Props) => {
           <Divider />
           <List>
             {navItems.map((item) => (
-              <ListItem key={item} disablePadding>
+              <ListItem key={item.id} disablePadding>
                 <ListItemButton sx={{ textAlign: "center" }}>
-                  <ListItemText primary={item} />
+                  <ListItemText primary={item.label} />
                 </ListItemButton>
               </ListItem>
             ))}
