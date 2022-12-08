@@ -1,15 +1,13 @@
 import { handleLoading } from "app/globalSlice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { globalSelector, homeSelector } from "app/selectors";
-import Loading from "components/Loading";
+import { homeSelector } from "app/selectors";
 import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect } from "react";
 import Newspaper from "../../components/Newspaper";
 import { getNews } from "./homePageSlice";
 
-const MainPage = () => {
+const HomePage = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector(globalSelector);
   const { newsData } = useAppSelector(homeSelector);
 
   useEffect(() => {
@@ -29,13 +27,12 @@ const MainPage = () => {
   }, []);
 
   return (
-    <main className="mainPage">
-      <Loading isOpen={isLoading} />
+    <main className="homePage">
       <WrapperContainer>
-        <div className="mainPage-title">
+        <div className="homePage-title">
           <h1>Tin mới nhất</h1>
         </div>
-        <div className="mainPage-list row">
+        <div className="homePage-list row">
           {newsData.map((newspaper, idx) => (
             <div className={`col-${idx === 0 ? 12 : 4}`} key={newspaper.id}>
               <Newspaper data={newspaper} firstNews={idx === 0} />
@@ -47,4 +44,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default HomePage;
