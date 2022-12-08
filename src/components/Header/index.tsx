@@ -87,7 +87,7 @@ export default function Header() {
               {categoryData.map((item) => (
                 <Box
                   component="li"
-                  key={item.id}
+                  key={item.link}
                   sx={{
                     color: "#000",
                     fontWeight: 700,

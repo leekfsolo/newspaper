@@ -44,7 +44,7 @@ const Sidenav = (props: Props) => {
           <Divider />
           <List>
             {navItems.map((item) => (
-              <ListItem key={item.id} disablePadding>
+              <ListItem key={item.link} disablePadding>
                 <ListItemButton sx={{ textAlign: "center" }}>
                   <ListItemText primary={item.label} />
                 </ListItemButton>

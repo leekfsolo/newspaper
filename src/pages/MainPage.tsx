@@ -2,6 +2,7 @@ import { handleLoading } from "app/globalSlice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { globalSelector, homeSelector } from "app/selectors";
 import Loading from "components/Loading";
+import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect } from "react";
 import Newspaper from "../components/Newspaper";
 import { getNews } from "./homePageSlice";
@@ -28,11 +29,17 @@ const MainPage = () => {
   }, []);
 
   return (
-    <main className="container py-3">
+    <main className="py-3">
       <Loading isOpen={isLoading} />
-      {newsData.map((newspaper) => (
-        <Newspaper key={newspaper.id} data={newspaper} />
-      ))}
+      <WrapperContainer>
+        <div className="newspaper-list row">
+          {newsData.map((newspaper) => (
+            <div className="col-4" key={newspaper.id}>
+              <Newspaper data={newspaper} />
+            </div>
+          ))}
+        </div>
+      </WrapperContainer>
     </main>
   );
 };
