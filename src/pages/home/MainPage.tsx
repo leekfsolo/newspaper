@@ -4,7 +4,7 @@ import { globalSelector, homeSelector } from "app/selectors";
 import Loading from "components/Loading";
 import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect } from "react";
-import Newspaper from "../components/Newspaper";
+import Newspaper from "../../components/Newspaper";
 import { getNews } from "./homePageSlice";
 
 const MainPage = () => {
@@ -29,13 +29,16 @@ const MainPage = () => {
   }, []);
 
   return (
-    <main className="py-3">
+    <main className="mainPage">
       <Loading isOpen={isLoading} />
       <WrapperContainer>
-        <div className="newspaper-list row">
-          {newsData.map((newspaper) => (
-            <div className="col-4" key={newspaper.id}>
-              <Newspaper data={newspaper} />
+        <div className="mainPage-title">
+          <h1>Tin mới nhất</h1>
+        </div>
+        <div className="mainPage-list row">
+          {newsData.map((newspaper, idx) => (
+            <div className={`col-${idx === 0 ? 12 : 4}`} key={newspaper.id}>
+              <Newspaper data={newspaper} firstNews={idx === 0} />
             </div>
           ))}
         </div>

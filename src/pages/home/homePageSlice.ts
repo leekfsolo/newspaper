@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import homeApi from "api/homeApi";
-import { INewspaper } from "./interface";
+import { INewspaper } from "pages/interface";
 
 const initialState: { newsData: INewspaper[] } = {
   newsData: [],

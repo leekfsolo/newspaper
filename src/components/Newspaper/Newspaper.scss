@@ -5,6 +5,37 @@
   border: 1px solid $neutral-300;
   border-radius: 12px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &-first {
+    flex-direction: row;
+
+    .newspaper-img {
+      order: 2;
+      width: 50%;
+      height: 288px;
+
+      img {
+        border: 0;
+      }
+    }
+
+    .newspaper-content {
+      padding: 40px;
+      width: 50%;
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      &__desc {
+        line-height: 22px;
+        font-size: 14px;
+        color: $neutral-900;
+      }
+    }
+  }
 
   &:hover {
     cursor: pointer;
@@ -16,9 +47,10 @@
 
     img {
       width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 12px 12px 0 0;
       border-bottom: 1px solid $neutral-300;
+      display: block;
     }
   }
 
@@ -43,10 +75,29 @@
 
       .newspaper-category {
         font-size: 11px;
-        background-color: $success-150;
-        padding: 6px 8px;
+        padding: 6px 12px;
         border-radius: 12px;
         font-weight: 500;
+
+        &__success {
+          background-color: $success-150;
+          color: $success-600;
+        }
+
+        &__secondary {
+          background-color: $secondary-150;
+          color: $secondary-500;
+        }
+
+        &__info {
+          background-color: $info-150;
+          color: $info-500;
+        }
+
+        &__warning {
+          background-color: $warning-150;
+          color: $warning-500;
+        }
       }
 
       .newspaper-time {

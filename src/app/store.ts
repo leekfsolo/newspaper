@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import headerReducer from "components/Header/headerSlice";
 import globalReducer from "./globalSlice";
-import homeReducer from "pages/homePageSlice";
+import homeReducer from "pages/home/homePageSlice";
 
 const rootReducer = {
   header: headerReducer,

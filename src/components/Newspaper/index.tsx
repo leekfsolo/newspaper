@@ -4,23 +4,40 @@ import React from "react";
 
 type Props = {
   data: INewspaper;
+  firstNews?: boolean;
+};
+
+const randomTags = () => {
+  const tags = ["success", "info", "secondary", "warning"];
+  const idx = Math.floor(Math.random() * tags.length);
+  return tags[idx];
 };
 
 const Newspaper = (props: Props) => {
-  const { data } = props;
-  const { image, title, createdAt, categorylinkNavigation } = data;
+  const { data, firstNews = false } = props;
+  const { image, title, createdAt, categorylinkNavigation, description } = data;
   const { label } = categorylinkNavigation;
 
   return (
-    <div className="newspaper">
+    <div className={`newspaper ${firstNews ? "newspaper-first" : ""}`}>
       <div className="newspaper-img">
         <img src={image} alt={title} />
       </div>
 
       <div className="newspaper-content">
-        <p>{title}</p>
+        <div className="">
+          <p>{title}</p>
+          {firstNews && (
+            <div className="newspaper-content__desc">{description}</div>
+          )}
+        </div>
+
         <div className="newspaper-content__footer">
-          <div className="newspaper-category">{label}</div>
+          <div
+            className={`newspaper-category newspaper-category__${randomTags()}`}
+          >
+            {label}
+          </div>
 
           <div className="newspaper-time">
             <span>
