@@ -12,12 +12,14 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getCategories } from "./headerSlice";
 import { handleLoading } from "app/globalSlice";
 import { headerSelector } from "app/selectors";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const headerRef = useRef<HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const { data: categoryData } = useAppSelector(headerSelector);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(handleLoading(true));
@@ -86,6 +88,7 @@ export default function Header() {
             >
               {categoryData.map((item) => (
                 <Box
+                  onClick={() => navigate(item.link)}
                   component="li"
                   key={item.link}
                   sx={{

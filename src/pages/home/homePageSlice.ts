@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import homeApi from "api/homeApi";
+import newsApi from "api/newsApi";
 import { INewspaper } from "pages/interface";
 
 const initialState: { newsData: INewspaper[] } = {
@@ -7,7 +7,7 @@ const initialState: { newsData: INewspaper[] } = {
 };
 
 export const getNews = createAsyncThunk("home/news", async () => {
-  const res = await homeApi.getNews();
+  const res = await newsApi.getNews();
   return res;
 });
 

@@ -1,6 +1,8 @@
+import { PageUrl } from "configuration/enum";
 import moment from "moment";
 import { INewspaper } from "pages/interface";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   data: INewspaper;
@@ -15,11 +17,16 @@ const randomTags = () => {
 
 const Newspaper = (props: Props) => {
   const { data, firstNews = false } = props;
-  const { image, title, createdAt, categorylinkNavigation, description } = data;
+  const { image, title, createdAt, categorylinkNavigation, description, id } =
+    data;
   const { label } = categorylinkNavigation;
+  const navigate = useNavigate();
 
   return (
-    <div className={`newspaper ${firstNews ? "newspaper-first" : ""}`}>
+    <div
+      className={`newspaper ${firstNews ? "newspaper-first" : ""}`}
+      onClick={() => navigate(`${PageUrl.NEWS_ROOT}/${id}`)}
+    >
       <div className="newspaper-img">
         <img src={image} alt={title} />
       </div>
