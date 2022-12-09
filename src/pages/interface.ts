@@ -7,7 +7,12 @@ export interface INewspaper {
   description: string;
   image: string;
   createdAt: string;
-  content: string;
   categorylink: string;
   categorylinkNavigation: ICategory;
+  newspaperContent: INewspaperContent;
+}
+
+export interface INewspaperContent {
+  id: string;
+  content: string;
 }

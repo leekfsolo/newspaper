@@ -17,7 +17,13 @@ const home = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getNews.fulfilled, (state, action: PayloadAction<any>) => {
-      state.newsData = action.payload.data;
+      const { data } = action.payload;
+      const sortedDataByDate = data.sort((a: INewspaper, b: INewspaper) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
+      state.newsData = sortedDataByDate;
     });
   },
 });

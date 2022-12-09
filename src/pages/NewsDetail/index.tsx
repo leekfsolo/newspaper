@@ -36,7 +36,9 @@ const NewsDetail = () => {
     <>
       {newsDetail ? (
         <div
-          dangerouslySetInnerHTML={{ __html: purifyHTML(newsDetail?.content) }}
+          dangerouslySetInnerHTML={{
+            __html: purifyHTML(newsDetail.newspaperContent.content),
+          }}
         ></div>
       ) : (
         <div></div>

@@ -5,6 +5,7 @@ import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect } from "react";
 import Newspaper from "../../components/Newspaper";
 import { getNews } from "./homePageSlice";
+import { Button } from "@mui/material";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +39,12 @@ const HomePage = () => {
               <Newspaper data={newspaper} firstNews={idx === 0} />
             </div>
           ))}
+        </div>
+
+        <div className="homePage-load d-flex justify-content-center">
+          <Button variant="outlined" color="primary">
+            Xem Thêm
+          </Button>
         </div>
       </WrapperContainer>
     </main>
