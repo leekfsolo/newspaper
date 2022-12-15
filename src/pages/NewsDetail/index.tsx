@@ -36,6 +36,7 @@ const NewsDetail = () => {
     <>
       {newsDetail ? (
         <div
+          className="news-detail container py-4"
           dangerouslySetInnerHTML={{
             __html: purifyHTML(newsDetail.newspaperContent.content),
           }}
