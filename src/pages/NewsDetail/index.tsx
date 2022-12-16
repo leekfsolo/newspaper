@@ -11,8 +11,6 @@ const NewsDetail = () => {
   const { newsDetail } = useAppSelector(newsDetailSelector);
   const { id } = useParams();
 
-  console.log(newsDetail);
-
   useEffect(() => {
     dispatch(handleLoading(true));
 
@@ -38,7 +36,7 @@ const NewsDetail = () => {
         <div
           className="news-detail container py-4"
           dangerouslySetInnerHTML={{
-            __html: purifyHTML(newsDetail.newspaperContent.content),
+            __html: purifyHTML(newsDetail.content),
           }}
         ></div>
       ) : (

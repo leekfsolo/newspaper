@@ -9,10 +9,12 @@ export interface INewspaper {
   createdAt: string;
   categorylink: string;
   categorylinkNavigation: ICategory;
-  newspaperContent: INewspaperContent;
+  content: string;
 }
 
-export interface INewspaperContent {
-  id: string;
-  content: string;
+export interface IPagination {
+  Filters: string;
+  Sorts: string;
+  PageSize: number;
+  Page: number;
 }
