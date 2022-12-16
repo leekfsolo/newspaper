@@ -1,4 +1,3 @@
-import { handleLoading } from "app/globalSlice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { homeSelector } from "app/selectors";
 import WrapperContainer from "components/WrapperContainer";
@@ -23,7 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     try {
       setIsLocalLoading(true);
-      const timeout = setTimeout(() => {
+      setTimeout(() => {
         const newsParams: IPagination = {
           Filters: "",
           Sorts: "",
