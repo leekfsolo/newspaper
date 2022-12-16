@@ -17,7 +17,11 @@ export const getNews = createAsyncThunk(
 const home = createSlice({
   name: "home",
   initialState,
-  reducers: {},
+  reducers: {
+    handleResetNews: (state) => {
+      state.newsData = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getNews.fulfilled, (state, action: PayloadAction<any>) => {
       const { collection } = action.payload.data;
@@ -31,5 +35,6 @@ const home = createSlice({
   },
 });
 
-const { reducer } = home;
+const { reducer, actions } = home;
+export const { handleResetNews } = actions;
 export default reducer;

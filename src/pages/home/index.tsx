@@ -3,7 +3,7 @@ import { homeSelector } from "app/selectors";
 import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect, useState } from "react";
 import Newspaper from "../../components/Newspaper";
-import { getNews } from "./homePageSlice";
+import { getNews, handleResetNews } from "./homePageSlice";
 import { IPagination } from "pages/interface";
 import { useInView } from "react-intersection-observer";
 import { CircularProgress } from "@mui/material";
@@ -49,6 +49,11 @@ const HomePage = () => {
       setPage((page) => page + 1);
     }
   }, [inView]);
+
+  useEffect(() => {
+    dispatch(handleResetNews());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="homePage">
