@@ -8,22 +8,31 @@
   display: flex;
   flex-direction: column;
 
+  @include mobile {
+    margin-bottom: 40px;
+  }
+
   &-first {
     flex-direction: row;
 
     .newspaper-img {
       order: 2;
       width: 50%;
-      height: 288px;
+      min-height: 288px;
 
       img {
         border: 0;
+        display: block;
       }
     }
 
     .newspaper-content {
       padding: 40px;
       width: 50%;
+
+      @include tablet {
+        padding: 20px;
+      }
 
       p {
         margin-bottom: 20px;
@@ -33,6 +42,7 @@
         line-height: 22px;
         font-size: 14px;
         color: $neutral-900;
+        display: block;
       }
     }
   }
@@ -61,11 +71,35 @@
     flex-direction: column;
     justify-content: space-between;
 
+    @include mobile {
+      padding: 16px;
+    }
+
     p {
       font-size: 20px;
       color: $neutral-700;
       font-weight: 700;
       line-height: 25px;
+
+      @include desktop {
+        font-size: 18px;
+      }
+
+      @include mobile {
+        font-size: 16px;
+      }
+    }
+
+    &__desc {
+      display: none;
+
+      &.firstNews {
+        display: block;
+      }
+
+      @include for-mobile-down {
+        display: block;
+      }
     }
 
     &__footer {

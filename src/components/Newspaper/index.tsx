@@ -3,6 +3,7 @@ import moment from "moment";
 import { INewspaper } from "pages/interface";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useWindowSize } from "usehooks-ts";
 
 type Props = {
   data: INewspaper;
@@ -19,12 +20,15 @@ const Newspaper = (props: Props) => {
   const { data, firstNews = false } = props;
   const { image, title, createdAt, categorylinkNavigation, description, id } =
     data;
+  const { width } = useWindowSize();
   const { label } = categorylinkNavigation;
   const navigate = useNavigate();
 
+  const firstNewsCases = firstNews && width >= 768;
+
   return (
     <div
-      className={`newspaper ${firstNews ? "newspaper-first" : ""}`}
+      className={`newspaper ${firstNewsCases ? "newspaper-first" : ""}`}
       onClick={() => navigate(`${PageUrl.NEWS_ROOT}/${id}`)}
     >
       <div className="newspaper-img">
@@ -34,9 +38,13 @@ const Newspaper = (props: Props) => {
       <div className="newspaper-content">
         <div className="">
           <p>{title}</p>
-          {firstNews && (
-            <div className="newspaper-content__desc">{description}</div>
-          )}
+          <div
+            className={`newspaper-content__desc mb-2 ${
+              firstNews ? "firstNews" : ""
+            }`}
+          >
+            {description}
+          </div>
         </div>
 
         <div className="newspaper-content__footer">
@@ -47,9 +55,7 @@ const Newspaper = (props: Props) => {
           </div>
 
           <div className="newspaper-time">
-            <span>
-              {moment(createdAt, "DD/MM/YYYY hh:mm").format("DD/MM/YYYY")}
-            </span>
+            <span>{moment(new Date(createdAt)).format("DD/MM/YYYY")}</span>
           </div>
         </div>
       </div>

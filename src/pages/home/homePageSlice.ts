@@ -25,11 +25,6 @@ const home = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getNews.fulfilled, (state, action: PayloadAction<any>) => {
       const { collection } = action.payload.data;
-      // const sortedDataByDate = data.sort((a: INewspaper, b: INewspaper) => {
-      //   return (
-      //     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      //   );
-      // });
       state.newsData = [...state.newsData, ...collection];
     });
   },

@@ -1,6 +1,7 @@
 import { handleLoading } from "app/globalSlice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { newsDetailSelector } from "app/selectors";
+import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { purifyHTML } from "utils/helpers/purifyHTML";
@@ -33,12 +34,14 @@ const NewsDetail = () => {
   return (
     <>
       {newsDetail ? (
-        <div
-          className="news-detail container py-4"
-          dangerouslySetInnerHTML={{
-            __html: purifyHTML(newsDetail.content),
-          }}
-        ></div>
+        <WrapperContainer className="news-detail py-4">
+          <div
+            className=""
+            dangerouslySetInnerHTML={{
+              __html: purifyHTML(newsDetail.content),
+            }}
+          ></div>
+        </WrapperContainer>
       ) : (
         <div></div>
       )}

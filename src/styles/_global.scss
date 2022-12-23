@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap");
 
 html {
   -webkit-box-sizing: border-box;
@@ -21,7 +21,7 @@ h4,
 h5,
 h6,
 p {
-  font-family: "Merriweather", serif !important;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 div,
@@ -29,4 +29,9 @@ span,
 small,
 label {
   font-family: "Roboto", "helvetica", sans-serif !important;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }

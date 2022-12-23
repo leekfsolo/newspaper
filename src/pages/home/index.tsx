@@ -63,7 +63,10 @@ const HomePage = () => {
         </div>
         <div className="homePage-list row">
           {newsData.map((newspaper, idx) => (
-            <div className={`col-${idx === 0 ? 12 : 4}`} key={newspaper.id}>
+            <div
+              className={`${idx === 0 ? "col-12" : "col-lg-4 col-sm-6 col-12"}`}
+              key={newspaper.id}
+            >
               <Newspaper data={newspaper} firstNews={idx === 0} />
             </div>
           ))}

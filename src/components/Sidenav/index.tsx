@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ICategory } from "components/interface";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   handleDrawerToggle: () => void;
@@ -19,6 +20,7 @@ type Props = {
 
 const drawerWidth = 240;
 const Sidenav = (props: Props) => {
+  const navigate = useNavigate();
   const { navItems, handleDrawerToggle, mobileOpen } = props;
 
   return (
@@ -44,7 +46,11 @@ const Sidenav = (props: Props) => {
           <Divider />
           <List>
             {navItems.map((item) => (
-              <ListItem key={item.link} disablePadding>
+              <ListItem
+                key={item.link}
+                disablePadding
+                onClick={() => navigate(item.link)}
+              >
                 <ListItemButton sx={{ textAlign: "center" }}>
                   <ListItemText primary={item.label} />
                 </ListItemButton>
