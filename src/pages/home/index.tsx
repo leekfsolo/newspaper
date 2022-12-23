@@ -10,7 +10,7 @@ import { CircularProgress } from "@mui/material";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const { newsData } = useAppSelector(homeSelector);
+  const { newsData, currentPage } = useAppSelector(homeSelector);
   const { ref, inView } = useInView({
     threshold: 0.7,
     initialInView: false,
@@ -21,21 +21,27 @@ const HomePage = () => {
 
   useEffect(() => {
     try {
-      setIsLocalLoading(true);
-      setTimeout(() => {
-        const newsParams: IPagination = {
-          Filters: "",
-          Sorts: "",
-          Page: page,
-          PageSize: 10,
-        };
-        const fetchData = async () => {
-          await dispatch(getNews(newsParams));
-        };
+      if (page > currentPage) {
+        setIsLocalLoading(true);
+        setTimeout(() => {
+          const newsParams: IPagination = {
+            Filters: "",
+            Sorts: "",
+            Page: page,
+            PageSize: 10,
+          };
+          const fetchData = async () => {
+            const res: any = await dispatch(getNews(newsParams)).unwrap();
 
-        fetchData();
-        setIsLocalLoading(false);
-      }, 1000);
+            if (res.data.collection.length === 0) {
+              setPage((page) => page - 1);
+            }
+          };
+
+          fetchData();
+          setIsLocalLoading(false);
+        }, 1000);
+      }
     } catch (err) {
       console.error("ERROR: ", err);
       setIsLocalLoading(false);

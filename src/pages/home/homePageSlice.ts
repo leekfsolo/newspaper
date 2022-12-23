@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import newsApi from "api/newsApi";
 import { INewspaper, IPagination } from "pages/interface";
 
-const initialState: { newsData: INewspaper[] } = {
+const initialState: { newsData: INewspaper[]; currentPage: number } = {
   newsData: [],
+  currentPage: 0,
 };
 
 export const getNews = createAsyncThunk(
@@ -19,17 +20,24 @@ const home = createSlice({
   initialState,
   reducers: {
     handleResetNews: (state) => {
-      state.newsData = [];
+      return initialState;
+    },
+    loadPages: (state) => {
+      state.currentPage++;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getNews.fulfilled, (state, action: PayloadAction<any>) => {
       const { collection } = action.payload.data;
-      state.newsData = [...state.newsData, ...collection];
+
+      if (collection.length > 0) {
+        state.currentPage++;
+        state.newsData = [...state.newsData, ...collection];
+      }
     });
   },
 });
 
 const { reducer, actions } = home;
-export const { handleResetNews } = actions;
+export const { handleResetNews, loadPages } = actions;
 export default reducer;
