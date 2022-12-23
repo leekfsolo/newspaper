@@ -3,38 +3,42 @@ import { homeSelector } from "app/selectors";
 import WrapperContainer from "components/WrapperContainer";
 import React, { useEffect, useState } from "react";
 import Newspaper from "../../components/Newspaper";
-import { getNews, handleResetNews } from "./homePageSlice";
+import {
+  getNews,
+  handleMaxPage,
+  handlePage,
+  handleResetNews,
+} from "./homePageSlice";
 import { IPagination } from "pages/interface";
 import { useInView } from "react-intersection-observer";
 import { CircularProgress } from "@mui/material";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const { newsData, currentPage } = useAppSelector(homeSelector);
+  const { newsData, currentPage, isMaxPage } = useAppSelector(homeSelector);
   const { ref, inView } = useInView({
     threshold: 0.7,
     initialInView: false,
     delay: 100,
   });
-  const [page, setPage] = useState<number>(1);
   const [isLocalLoading, setIsLocalLoading] = useState<boolean>(false);
 
   useEffect(() => {
     try {
-      if (page > currentPage) {
+      if (!isMaxPage) {
         setIsLocalLoading(true);
         setTimeout(() => {
           const newsParams: IPagination = {
             Filters: "",
             Sorts: "",
-            Page: page,
+            Page: currentPage,
             PageSize: 10,
           };
           const fetchData = async () => {
             const res: any = await dispatch(getNews(newsParams)).unwrap();
 
             if (res.data.collection.length === 0) {
-              setPage((page) => page - 1);
+              dispatch(handleMaxPage());
             }
           };
 
@@ -48,13 +52,14 @@ const HomePage = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [currentPage]);
 
   useEffect(() => {
-    if (inView) {
-      setPage((page) => page + 1);
+    if (inView && !isMaxPage) {
+      dispatch(handlePage(1));
     }
-  }, [inView]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView, isMaxPage]);
 
   useEffect(() => {
     dispatch(handleResetNews());
