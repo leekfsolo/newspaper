@@ -11,7 +11,6 @@ import { getCategories } from "./headerSlice";
 import { handleLoading } from "app/globalSlice";
 import { headerSelector } from "app/selectors";
 import { useNavigate } from "react-router-dom";
-import { PageUrl } from "configuration/enum";
 import HeaderLogo from "./HeaderLogo";
 
 export default function Header() {
