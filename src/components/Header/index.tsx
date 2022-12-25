@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import HomeIcon from "@mui/icons-material/Home";
 import Sidenav from "../Sidenav";
 import { Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -13,6 +11,8 @@ import { getCategories } from "./headerSlice";
 import { handleLoading } from "app/globalSlice";
 import { headerSelector } from "app/selectors";
 import { useNavigate } from "react-router-dom";
+import { PageUrl } from "configuration/enum";
+import HeaderLogo from "./HeaderLogo";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -43,95 +43,98 @@ export default function Header() {
   };
 
   return (
-    <Box sx={{ display: "flex" }} className="header">
+    <>
       <AppBar
         component="nav"
         position="sticky"
-        sx={{ background: "transparent", overflow: "hidden" }}
+        sx={{ background: "white", overflow: "hidden" }}
       >
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            color: "#000",
-          }}
-          className="header-toolbar"
-        >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
-            className="header-toolbar__iconDrawer"
+        <Box className="header">
+          <Toolbar
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              color: "#000",
+            }}
+            className="header-toolbar"
           >
-            <MenuIcon />
-          </IconButton>
-          <Box
-            sx={{ gap: 2 }}
-            ref={headerRef}
-            className="header-toolbar__navbar"
-          >
-            <Button sx={{ padding: 0, minWidth: "auto", color: "#000" }}>
-              <HomeIcon />
-            </Button>
-            <Box
-              className="header-list"
-              component="ul"
-              sx={{
-                gap: 2,
-                margin: 0,
-                padding: 0,
-                listStyleType: "none",
-                alignItems: "center",
-              }}
-            >
-              {categoryData.map((item) => (
-                <Box
-                  onClick={() => navigate(item.link)}
-                  component="li"
-                  key={item.link}
-                  sx={{
-                    color: "#000",
-                    fontWeight: 700,
-                    padding: 0,
-                    minWidth: "auto",
-                    cursor: "pointer",
-                  }}
-                  className="header-list__item"
-                >
-                  {item.label}
-                </Box>
-              ))}
-            </Box>
-            <Box
-              sx={{
-                padding: 0,
-                minWidth: "auto",
-                color: "#999",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-              }}
-              onClick={handleDrawerToggle}
-              className="navbar-readAll"
-            >
-              <Typography
-                sx={{ fontSize: 13, marginRight: "5px", fontWeight: 700 }}
+            <Box className="header-toolbar__tablet">
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2 }}
+                className="iconDrawer"
               >
-                Tất cả
-              </Typography>
-              <MenuIcon sx={{ fontSize: 17 }} />
+                <MenuIcon />
+              </IconButton>
+              <HeaderLogo />
             </Box>
-          </Box>
-        </Toolbar>
+            <Box
+              sx={{ gap: 2 }}
+              ref={headerRef}
+              className="header-toolbar__navbar"
+            >
+              <HeaderLogo />
+              <Box
+                className="header-list"
+                component="ul"
+                sx={{
+                  gap: 2,
+                  margin: 0,
+                  padding: 0,
+                  listStyleType: "none",
+                  alignItems: "center",
+                }}
+              >
+                {categoryData.map((item) => (
+                  <Box
+                    onClick={() => navigate(item.link)}
+                    component="li"
+                    key={item.link}
+                    sx={{
+                      color: "#000",
+                      fontWeight: 700,
+                      padding: 0,
+                      minWidth: "auto",
+                      cursor: "pointer",
+                    }}
+                    className="header-list__item"
+                  >
+                    {item.label}
+                  </Box>
+                ))}
+              </Box>
+              <Box
+                sx={{
+                  padding: 0,
+                  minWidth: "auto",
+                  color: "#999",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+                onClick={handleDrawerToggle}
+                className="navbar-readAll"
+              >
+                <Typography
+                  sx={{ fontSize: 13, marginRight: "5px", fontWeight: 700 }}
+                >
+                  Tất cả
+                </Typography>
+                <MenuIcon sx={{ fontSize: 17 }} />
+              </Box>
+            </Box>
+          </Toolbar>
+        </Box>
       </AppBar>
       <Sidenav
         handleDrawerToggle={handleDrawerToggle}
         navItems={categoryData}
         mobileOpen={mobileOpen}
       />
-    </Box>
+    </>
   );
 }
